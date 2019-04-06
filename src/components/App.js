@@ -1,11 +1,12 @@
 import React, { Component } from "react"
-import { Route, Redirect } from "react-router-dom"
+import { Route, Redirect, Switch } from "react-router-dom"
 import { connect } from 'react-redux'
 
 import "../styles/App.css"
 
 import AuthPage from "./AuthPage"
 import NavBar from './NavBar'
+import UsersTable from './UsersTable'
 
 const mapStateToProps = ({auth}) => ({
   isAuth: auth.token !== null,
@@ -14,7 +15,6 @@ const mapStateToProps = ({auth}) => ({
 class PrivateRouteUnconnected extends Component {
   render(){
     const { component: Component, isAuth, ...rest } = this.props
-    console.log(this.props.isAuth)
     return <Route
       {...rest}
       render={
@@ -32,9 +32,10 @@ const PrivateRoute = connect(mapStateToProps)(PrivateRouteUnconnected)
 class Panel extends Component {
   render() {
     return (
-      <div>
+      <>
         <NavBar />
-      </div>
+        <Route path="/panel/users" component={UsersTable} />
+      </>
     )
   }
 }
@@ -42,14 +43,16 @@ class Panel extends Component {
 class App extends Component {
   render() {
     return (
-      <div>
-        <PrivateRoute exact path="/" component={Panel}/>
+      <>
+        <Switch>
+          <Redirect exact from="/" to="/panel/users" />
+          <PrivateRoute path="/panel" component={Panel}/>
+        </Switch>
         <Route path="/auth" component={AuthPage} />
-      </div>
+      </>
     )
   }
 }
-
 
 
 

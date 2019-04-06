@@ -19,8 +19,8 @@ class NavBar extends Component {
       <Navbar>
         <Navbar.Brand>online.fdm.center</Navbar.Brand>
         <Nav className="mr-auto">
-          <LinkContainer to="/auth">
-            <Nav.Link>123</Nav.Link>
+          <LinkContainer to="/panel/users">
+            <Nav.Link>Пользователи</Nav.Link>
           </LinkContainer>
         </Nav>
         <Button variant="outline-secondary" onClick={this.props.unlogin}>Выйти</Button>
