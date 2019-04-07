@@ -61,10 +61,9 @@ class UsersTable extends Component {
       mail: e.target.mail.value,
       password:  (oldUser.password == e.target.password.value) ? undefined : e.target.password.value,
       address: e.target.address.value,
-      balance: e.target.balance.value,
+      balance: Number(e.target.balance.value),
       group: e.target.group.value,
     }
-    console.log(user)
     this.props.updateUser(user)
     this.setState({updateModal: null})
   }
